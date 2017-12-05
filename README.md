@@ -34,7 +34,8 @@ To save data, you need to count_log.php send a GET request with the parameters:
 `token`, `page` (name of the page), `ip` (`REMOTE_ADDR`).
 
 To get Log table you need to count_log.php send a GET request with the parameters:
-`page=count_log`, `days` (for how many days from the current).
+`page=count_log`, `days` (for how many days from the current). It does `count_log.html`.
+To change days you can use keys 1 to 9, or A (all log).
 
 
 [Run application.]( http://sergechurkin.vacau.com/count_log.html)
