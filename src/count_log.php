@@ -7,7 +7,7 @@ function count_log($params, $page, $days, $ip) {
     try {
         $pdo = new \PDO('mysql:host=' . $params['host'] . ';dbname=' . $params['database'], $params['username'], $params['password']);
     } catch (\PDOException $e) {
-        $rdata = [[ 'error'=>'Нет соезинения с БД ' . $params['database']]];
+        $rdata = [[ 'error'=>'Нет соезинения с БД ' . $params['database'] . ' ' . $e->getMessage()]];
         return $rdata;
     }
     if ($page === 'count_log') {                 

@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="Log" content="Saving and forming the Log of visits WEB site pages based on AJAX requests (php and js). Хранение и формирование журнала посещений страниц веб-сайта на основе запросов AJAX.">
+    <meta name="Log" content="Saving and forming the Log of visits WEB site pages based on AJAX requests (php and js). Формирование журнала посещений страниц веб-сайта на основе запросов AJAX.">
     <title>Log</title>
     <style>
 .title { float: left; }
@@ -43,7 +43,8 @@
     background-color: limegreen;
     color: white;
     cursor: pointer;
-}    </style>
+}
+    </style>
 </head>
 <body><div id="div"></div>
     <script>
@@ -58,9 +59,10 @@ function isMobile() {
             || useragent.indexOf('iPad') != -1;
 }
 function getlog(days) {
+  var total = 0, totalu = 0;
   if(isMobile()) days = 7;
-xhr.open('GET', 'http://sergechurkin.000webhostapp.com/src/count_log.php?page=count_log&days=' + days, true);
-////  xhr.open('GET', 'src_my/count_log.php?page=count_log&days=' + days, true);
+  xhr.open('GET', 'http://sergechurkin.000webhostapp.com/src/count_log.php?page=count_log&days=' + days, true);
+//  xhr.open('GET', 'src_my/count_log.php?page=count_log&days=' + days, true);
   xhr.send();
   xhr.onreadystatechange = function() { // (3)
     var data = '', str = '';
@@ -74,8 +76,11 @@ xhr.open('GET', 'http://sergechurkin.000webhostapp.com/src/count_log.php?page=co
       }
       str = '<table id="log"><caption><strong>Log of visits pages <a href="http://sergechurkin.vacau.com/">http://sergechurkin.vacau.com/</a></strong></caption><thead><tr>';
       for (key in data[0]) {
+        var dtype = 'string';
+        if (key === 'dt') dtype = 'date';
+        if (key === 'view') dtype = 'number';
         str = str +
-              '<th data-type="date"><div class="title">' + key + '</div><div></div></th>';
+              '<th data-type="' + dtype + '"><div class="title">' + key + '</div><div></div></th>';
       }
       if (data[0]['ip'] != undefined) {
         str = str +
@@ -91,14 +96,20 @@ xhr.open('GET', 'http://sergechurkin.000webhostapp.com/src/count_log.php?page=co
          str = str + '<td>' + item[key] + '</td>';
         }
         if (item.ip != undefined) {
-          str = str +
-             '<td></td>' +
-             '<td></td>' +
-             '<td></td>' +
-             '<td></td>';
+          for (var i = 0; i < 4; i++) str = str +'<td></td>';
         }
         str = str + '</tr>';
+        totalu++;
+        if (item.view != undefined) total = total + Number(item.view);
       });
+      str = str + '<tfoot>';
+      if (data[0].view != undefined) {
+        str = str + '<tr id="total">' + 
+             '<td><strong>Total<strong></td>' +
+             '<td><strong>' + totalu + '</strong></td>' +
+             '<td><strong>' + total + '</strong></td>' +
+             '</tr>';
+      }
       str = str + '</tbody></table>';
       data.forEach(function(item, i, arr) {
         if (item.ip != undefined) {
