@@ -1,11 +1,11 @@
 # log
-Saving and forming the Log of visits WEB site pages based on AJAX requests.Saving (php and js).
+Saving and forming the Log of visits WEB site pages based on AJAX requests (php and js).
 
 ![Скрин приложения](count_log.png)
 
 ## Description
 
-The application savinglog information in `mySQL` table:
+The application saving log information in `mySQL` table:
 
 ```
 CREATE TABLE `count_log` (
