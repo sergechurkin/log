@@ -1,7 +1,7 @@
 # log
 Saving and forming the Log of visits WEB site pages based on AJAX requests (php and js).
 
-![Скрин приложения](count_log.png)
+![Г‘ГЄГ°ГЁГ­ ГЇГ°ГЁГ«Г®Г¦ГҐГ­ГЁГї](count_log.png)
 
 ## Description
 
@@ -38,4 +38,4 @@ To get Log table you need to count_log.php send a GET request with the parameter
 To change days you can use keys 1 to 9, or A (all log).
 
 
-[Run application.]( http://sergechurkin.vacau.com/count_log.html)
+[Run application.]( https://foraminiferous-reli.000webhostapp.com/count_log.html)
